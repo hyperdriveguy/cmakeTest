@@ -1,50 +1,28 @@
 <img src=".cbc/CBClogo.png" alt="Computing Boot Camp Logo" width="100"/>
 
-# BYU Computing Bootcamp - Make Tests
+# BYU Computing Bootcamp - CMake Tests
 
-So you believe that you've mastered Make, do you? Well, it's time to prove it! Upon completion of this test, you will recieve
-the "Make Knowledge Badge" from the BYU Computing Bootcamp to attest of your knowledge and expertise. Here's a link to the badge on Badgr so that you can go admire it: [Click here!](https://badgr.com/public/badges/opPKYN_pQFi6UWl1Q_aT5Q)
+So you believe that you've mastered CMake, do you? Well, it's time to prove it! Upon completion of this test, you will recieve
+the "CMake Knowledge Badge" from the BYU Computing Bootcamp to attest of your knowledge and expertise. Here's a link to the badge on Badgr so that you can go admire it: [Click here!](https://badgr.com/public/badges/dHgXDlBtTCa1Re-LwGo5pw)
 
-<img src="https://media.badgr.com/uploads/badges/8e853a0b-726b-4101-8cb0-4b299926f19d.png" alt="Make Badge" width="200"/>
+<img src="https://media.badgr.com/uploads/badges/060b773b-bd5c-48b0-82e3-68af87eabf0f.png" alt="CMake Badge" width="200"/>
 
-While completing this test, you are not allowed to copy paste code from another source. If you are unable to complete the test this way, go back and practice some more! We don't do this because we're mean, but rather because we can't attest to your knowledge unless you can do it on your own. This means that when you do complete the test, you will actually be an expert in Make, rather than someone who knows how to copy and paste from the Internet.
+While completing this test, you are not allowed to copy paste code from another source. If you are unable to complete the test this way, go back and practice some more! We don't do this because we're mean, but rather because we can't attest to your knowledge unless you can do it on your own. This means that when you do complete the test, you will actually be an expert in CMake, rather than someone who knows how to copy and paste from the Internet.
 
-Don't worry if the test gives you trouble, you can take it as many times as you'd like. The repeated trials will help you solidify the concepts into your brain, training yourself to remember the most important parts of Make.
+Don't worry if the test gives you trouble, you can take it as many times as you'd like. The repeated trials will help you solidify the concepts into your brain, training yourself to remember the most important parts of CMake.
 
 ## Setup
 
 First, fork the repository to your user by pressing the fork button in the upper right hand corner. Then, you can clone the repository onto your computer with:
 ```
-git clone https://github.com/<your_username>/makeTest.git
+git clone https://github.com/<your_username>/cmakeTest.git
 ```
 Now you are now ready to start coding!
 Start out by entering your email into the 'email.txt' file, so that we can properly give you your badge when you pass the test.
 
-## Problem 1 - Makefile1.txt
+## Problem 1 - 
 
-Write a Makefile that implements the following functionality. You'll store the contents of this Makefile at "MakeFiles/MakeFile1.txt". It
-should be very simple, and shouldn't use variables, automatic variables, pattern matching, or Makefile functions. It should have the following two rules:
-
-#### tree:
-This rule should be the first rule in the file. It should be called "tree", and it should generate an executable called "tree" with the g++ compiler. It should use 7 files to do so, including leaves.c, leaves.h, branches.c, branches.h, roots.c, roots.h, and main.c.
-
-#### clean:
-This rule should be called "clean", and it should remove the "tree" executable if there is one.
-
-## Problem 2 - Makefile2.txt
-
-Write a Makefile that implements the following functionality. You'll store the contents of this Makefile at "MakeFiles/MakeFile2.txt". It
-will be complicated, and shouldn't have the words "main", "leaves", "Leaves", "roots", "Roots", "branches", or "Branches" anywhere in the file. It should have at least the following three rules:
-
-#### $(TARGET):
-This rule should be the first rule in the file. It should be called "$(TARGET)", and it should generate an executable called "tree" with the g++ compiler. It should use all of the .h and .c files found in the directory. Then, it should save the names of all the files that it used
-in a text file called "compiled.txt".
-
-#### %.o:
-This rule should be called "%.o", and uses pattern matching to generate all the necessary .o files for the $(TARGET) rule.
-
-#### clean:
-This rule should be called "clean", and should remove the tree executable, compiled.txt file, and the .o files.
+## Problem 2 - 
 
 ## Submitting
 
@@ -64,10 +42,10 @@ pull request when its finished. So after a bit, check the Pull Request to see th
 It will have comments describing which parts of the test you passed.
 
 ### If you passed...
-Congradulations! You've passed the Make test, and you have been certified
-by the BYU Computing BootCamp to have "Make" Knowledge. You should recieve an email with your badge contained inside. The
+Congradulations! You've passed the CMake test, and you have been certified
+by the BYU Computing BootCamp to have "CMake" Knowledge. You should recieve an email with your badge contained inside. The
 Pull Request has a comment with the email that the badge was sent to, so if you didn't recieve it, check to make sure
-you entered your email correctly. Show off the "Make" badge to potential employers, or use it with other Computing BootCamp 
+you entered your email correctly. Show off the "CMake" badge to potential employers, or use it with other Computing BootCamp 
 badges to gain the "Software Development Knowledge" badge!
 
 ### If you didn't pass...
