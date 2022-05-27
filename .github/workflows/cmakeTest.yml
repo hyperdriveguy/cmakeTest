@@ -47,21 +47,21 @@ jobs:
       #Problem 1 Testing
     - name: Get root CMakeLists.txt
       id: getCMakeLists1
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} CMakeLists.txt > CMakeLists
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} CMakeLists.txt > CMakeLists.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in root"
 
     - name: Get harp CMakeLists.txt
       id: getCMakeLists2
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} harp/CMakeLists.txt > harpCMakeLists
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} harp/CMakeLists.txt > harp/CMakeLists.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in harp"
 
     - name: Get lib CMakeLists.txt
       id: getCMakeLists3
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} lib/CMakeLists.txt > libCMakeLists
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} lib/CMakeLists.txt > lib/CMakeLists.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in lib"
