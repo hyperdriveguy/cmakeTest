@@ -119,7 +119,9 @@ jobs:
 
     - name: Make clean
       id: makeClean
-      run: make clean
+      run: |
+        cd build
+        make clean
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile clean function ran"
@@ -127,6 +129,7 @@ jobs:
     - name: Find File
       continue-on-error: true
       run: |
+        cd build
         echo "Found? " > clean.txt
         test -f tree && echo "Yes" >> clean.txt
 
