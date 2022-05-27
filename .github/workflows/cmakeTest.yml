@@ -95,7 +95,7 @@ jobs:
 
     - name: Run program
       id: runProgram
-      run: ./perform > output.log
+      run: ./build/perform > output.log
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Executable ran"
