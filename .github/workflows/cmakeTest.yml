@@ -216,6 +216,10 @@ jobs:
     - name: Failure Comment
       if: always() && steps.makeClean.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - Makefile clean didn't run"
+
+    - name: Failure Comment
+      if: always() && steps.find.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - Couldn't find clean.txt"
     
     - name: Failure Comment
       if: always() && steps.fileGone.outcome == 'failure'
