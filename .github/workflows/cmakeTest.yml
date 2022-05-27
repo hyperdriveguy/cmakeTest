@@ -66,25 +66,29 @@ jobs:
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in lib"
 
-    - name: Create Build
-      id: build
-      run: |
-        mkdir build
-        cd build
+    # - name: Create Build
+    #   id: build
+    #   run: |
+    #     mkdir build
+    #     cd build
 
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Build directory created"
+    # - name: Comment
+    #   run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Build directory created"
 
-    - name: Run CMake
-      id: runCMake
-      run: cmake ..   
+    # - name: Run CMake
+    #   id: runCMake
+    #   run: cmake ..   
 
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile created"
+    # - name: Comment
+    #   run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile created"
 
     - name: Run Make
       id: runMake
-      run: make
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile ran"
@@ -186,13 +190,13 @@ jobs:
       if: always() && steps.getCMakeLists3.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - No CMakeLists.txt found in root"
 
-    - name: Failure Comment
-      if: always() && steps.build.outcome == 'failure'
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - Build directory not created"
+    # - name: Failure Comment
+    #   if: always() && steps.build.outcome == 'failure'
+    #   run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - Build directory not created"
 
-    - name: Failure Comment
-      if: always() && steps.runCMake.outcome == 'failure'
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - CMakeLists.txt failed"
+    # - name: Failure Comment
+    #   if: always() && steps.runCMake.outcome == 'failure'
+    #   run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - CMakeLists.txt failed"
 
     - name: Failure Comment
       if: always() && steps.runMake.outcome == 'failure'
