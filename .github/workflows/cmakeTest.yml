@@ -137,7 +137,7 @@ jobs:
       id: find
       uses: juliangruber/read-file-action@v1
       with:
-        path: clean.txt
+        path: build/clean.txt
 
     - name: Assert File Gone
       id: fileGone
