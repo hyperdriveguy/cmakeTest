@@ -187,11 +187,11 @@ jobs:
     
     - name: Failure Comment
       if: always() && steps.getCMakeLists2.outcome == 'failure'
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - No CMakeLists.txt found in root"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - No CMakeLists.txt found in harp"
 
     - name: Failure Comment
       if: always() && steps.getCMakeLists3.outcome == 'failure'
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - No CMakeLists.txt found in root"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Error - No CMakeLists.txt found in lib"
 
     - name: Failure Comment
       if: always() && steps.build.outcome == 'failure'
