@@ -44,24 +44,24 @@ jobs:
       run: node .cbc/addLabel.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} currentlyBeingChecked
 
       #Add CMake tests below this line
-      #Problem 1 Testing
+      #Problem 2 Testing
     - name: Get root CMakeLists.txt
       id: getCMakeLists1
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} CMakeLists.txt > CMakeLists.txt
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem2/CMakeLists.txt > CMakeLists.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in root"
 
     - name: Get harp CMakeLists.txt
       id: getCMakeLists2
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} harp/CMakeLists.txt > harp/CMakeLists.txt
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem2/harp/CMakeLists.txt > harp/CMakeLists.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in harp"
 
     - name: Get lib CMakeLists.txt
       id: getCMakeLists3
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} lib/CMakeLists.txt > lib/CMakeLists.txt
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem2/lib/CMakeLists.txt > lib/CMakeLists.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in lib"
@@ -69,6 +69,7 @@ jobs:
     - name: Create Build
       id: build
       run: |
+        cd problem2
         mkdir build
         cd build
 
@@ -78,7 +79,7 @@ jobs:
     - name: Run CMake
       id: runCMake
       run: |
-        cd build
+        cd problem2/build
         cmake ..   
 
     - name: Comment
@@ -87,7 +88,7 @@ jobs:
     - name: Run Make
       id: runMake
       run: |
-        cd build
+        cd problem2/build
         make
 
     - name: Comment
@@ -95,7 +96,7 @@ jobs:
 
     - name: Run program
       id: runProgram
-      run: ./build/perform > output.log
+      run: ./problem2/build/perform > output.log
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Executable ran"
@@ -120,7 +121,7 @@ jobs:
     - name: Make clean
       id: makeClean
       run: |
-        cd build
+        cd problem2/build
         make clean
 
     - name: Comment
@@ -129,7 +130,7 @@ jobs:
     - name: Find File
       continue-on-error: true
       run: |
-        cd build
+        cd problem2/build
         echo "Found? " > clean.txt
         test -f tree && echo "Yes" >> clean.txt
 
@@ -137,7 +138,7 @@ jobs:
       id: find
       uses: juliangruber/read-file-action@v1
       with:
-        path: build/clean.txt
+        path: problem2/build/clean.txt
 
     - name: Assert File Gone
       id: fileGone
@@ -157,7 +158,7 @@ jobs:
    # - name: Comment
    #   run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile1.txt doesn't contain Variables, Automatic Variables, Pattern Matching, or Makefile Functions"
       
-      #Problem 2 Testing
+      #Problem 1 Testing
 
       #Issue Badge -- Do not change!! 
     - name: Get email.txt
