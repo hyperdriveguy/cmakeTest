@@ -207,7 +207,7 @@ jobs:
       run: ./problem1/build/apps/hello > output.txt
 
     - name: Problem 1, Printing output
-      run: cat output.txt
+      run: wc output.txt
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable ran"
