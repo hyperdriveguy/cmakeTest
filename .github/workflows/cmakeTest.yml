@@ -45,113 +45,6 @@ jobs:
 
       #Add CMake tests below this line
 
-      #Problem 1 Testing
-    - name: Problem 1, Get root CMakeLists.txt
-      id: p1getCMakeLists1
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/CMakeLists.txt > problem1/CMakeLists.txt
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in root"
-
-    - name: Problem 1, Get apps CMakeLists.txt
-      id: p1getCMakeLists2
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/apps/CMakeLists.txt > problem1/apps/CMakeLists.txt
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in apps"
-
-    - name: Problem 1, Get include CMakeLists.txt
-      id: p1getCMakeLists3
-      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/include/CMakeLists.txt > problem1/include/CMakeLists.txt
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in include"
-
-    - name: Problem 1, Create Build
-      id: p1build
-      run: |
-        cd problem1
-        mkdir build
-        cd build
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Build directory created"
-
-    - name: Problem 1, Run CMake
-      id: p1runCMake
-      run: |
-        cd problem1/build
-        cmake ..   
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile created"
-
-    - name: Problem 1, Run Make
-      id: p1runMake
-      run: |
-        cd problem1/build
-        make
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile ran"
-
-    - name: Problem 1, Run program
-      id: p1runProgram
-      run: ./problem1/build/apps/hello > output.log
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable ran"
-
-    - name: Problem 1, Read Output
-      id: p1output
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: output.log
-
-    - name: Problem 1, Assert Proper Output
-      id: p1properOutput
-      uses: therussiankid92/gat@v1.5
-      with:
-        assertion: should.equal
-        actual: ${{ steps.output.outputs.content }}
-        expected: ${{ secrets.PROGRAM_OUTPUT1 }}
-    
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable output is correct"
-
-    - name: Problem 1, Make clean
-      id: p1makeClean
-      run: |
-        cd problem1/build
-        make clean
-
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile clean function ran"
-
-    - name: Problem 1, Find File
-      continue-on-error: true
-      run: |
-        cd problem1/build
-        echo "Found? " > clean.txt
-        test -f tree && echo "Yes" >> clean.txt
-
-    - name: Problem 1, Read Find Output
-      id: p1find
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: problem1/build/clean.txt
-
-    - name: Problem 1, Assert File Gone
-      id: p1fileGone
-      uses: therussiankid92/gat@v1.5
-      with:
-        assertion: should.equal
-        actual: ${{ steps.find.outputs.content }}
-        expected: Found?
-    
-    - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile clean function deleted the tree executable"
-
       #Problem 2 Testing
     - name: Get root CMakeLists.txt
       id: getCMakeLists1
@@ -258,6 +151,113 @@ jobs:
     
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile clean function deleted the tree executable"
+
+      #Problem 1 Testing
+    - name: Problem 1, Get root CMakeLists.txt
+      id: p1getCMakeLists1
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/CMakeLists.txt > problem1/CMakeLists.txt
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in root"
+
+    - name: Problem 1, Get apps CMakeLists.txt
+      id: p1getCMakeLists2
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/apps/CMakeLists.txt > problem1/apps/CMakeLists.txt
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in apps"
+
+    - name: Problem 1, Get include CMakeLists.txt
+      id: p1getCMakeLists3
+      run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/include/CMakeLists.txt > problem1/include/CMakeLists.txt
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in include"
+
+    - name: Problem 1, Create Build
+      id: p1build
+      run: |
+        cd problem1
+        mkdir build
+        cd build
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Build directory created"
+
+    - name: Problem 1, Run CMake
+      id: p1runCMake
+      run: |
+        cd problem1/build
+        cmake ..   
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile created"
+
+    - name: Problem 1, Run Make
+      id: p1runMake
+      run: |
+        cd problem1/build
+        make
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile ran"
+
+    - name: Problem 1, Run program
+      id: p1runProgram
+      run: ./problem1/build/apps/hello > output.log
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable ran"
+
+    - name: Problem 1, Read Output
+      id: p1output
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: output.log
+
+    - name: Problem 1, Assert Proper Output
+      id: p1properOutput
+      uses: therussiankid92/gat@v1.5
+      with:
+        assertion: should.equal
+        actual: ${{ steps.output.outputs.content }}
+        expected: ${{ secrets.PROGRAM_OUTPUT1 }}
+    
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable output is correct"
+
+    - name: Problem 1, Make clean
+      id: p1makeClean
+      run: |
+        cd problem1/build
+        make clean
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile clean function ran"
+
+    - name: Problem 1, Find File
+      continue-on-error: true
+      run: |
+        cd problem1/build
+        echo "Found? " > clean.txt
+        test -f tree && echo "Yes" >> clean.txt
+
+    - name: Problem 1, Read Find Output
+      id: p1find
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: problem1/build/clean.txt
+
+    - name: Problem 1, Assert File Gone
+      id: p1fileGone
+      uses: therussiankid92/gat@v1.5
+      with:
+        assertion: should.equal
+        actual: ${{ steps.find.outputs.content }}
+        expected: Found?
+    
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile clean function deleted the tree executable"
 
    # - name: Assert No Variables, Automatic Variables, Pattern Matching, or Makefile Functions in MakeFile1.txt
    #   id: assertNoVariables
