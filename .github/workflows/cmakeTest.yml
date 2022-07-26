@@ -204,10 +204,7 @@ jobs:
 
     - name: Problem 1, Run program
       id: p1runProgram
-      run: ./problem1/build/apps/hello > output.txt
-
-    - name: Problem 1, Printing output
-      run: wc output.txt
+      run: ./problem1/build/apps/hello > output.log
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable ran"
