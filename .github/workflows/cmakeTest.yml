@@ -114,7 +114,7 @@ jobs:
       with:
         assertion: should.equal
         actual: ${{ steps.output.outputs.content }}
-        expected: ${{ secrets.PROGRAM_OUTPUT }}
+        expected: ${{ secrets.PROGRAM_OUTPUT2 }}
     
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Executable output is correct"
