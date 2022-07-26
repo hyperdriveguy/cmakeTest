@@ -220,7 +220,7 @@ jobs:
       uses: therussiankid92/gat@v1.5
       with:
         assertion: should.equal
-        actual: ${{ steps.output.outputs.content }}
+        actual: ${{ steps.p1output.outputs.content }}
         expected: ${{ secrets.PROGRAM_OUTPUT1 }}
     
     - name: Comment
