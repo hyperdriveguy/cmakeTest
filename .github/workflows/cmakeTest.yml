@@ -97,23 +97,23 @@ jobs:
 
     - name: Problem 1, Run program
       id: p1runProgram
-      run: ./problem1/build/apps/hello > output1.log
+      run: ./problem1/build/apps/hello > output.log
 
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable ran"
 
-    - name: Problem 1, Read Output1
+    - name: Problem 1, Read Output
       id: p1output
       uses: juliangruber/read-file-action@v1
       with:
-        path: output1.log
+        path: output.log
 
     - name: Problem 1, Assert Proper Output
       id: p1properOutput
       uses: therussiankid92/gat@v1.5
       with:
         assertion: should.equal
-        actual: ${{ steps.output1.outputs.content }}
+        actual: ${{ steps.output.outputs.content }}
         expected: ${{ secrets.PROGRAM_OUTPUT1 }}
     
     - name: Comment
