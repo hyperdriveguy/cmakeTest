@@ -146,7 +146,7 @@ jobs:
       uses: therussiankid92/gat@v1.5
       with:
         assertion: should.equal
-        actual: ${{ steps.find.outputs.content }}
+        actual: ${{ steps.p1find.outputs.content }}
         expected: Found?
     
     - name: Comment
@@ -253,7 +253,7 @@ jobs:
       uses: therussiankid92/gat@v1.5
       with:
         assertion: should.equal
-        actual: ${{ steps.find.outputs.content }}
+        actual: ${{ steps.p2find.outputs.content }}
         expected: Found?
     
     - name: Comment
