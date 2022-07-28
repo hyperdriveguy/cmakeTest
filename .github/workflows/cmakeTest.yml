@@ -51,21 +51,21 @@ jobs:
       run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/CMakeLists.txt > problem1/CMakeLists.txt
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in root"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in root"
 
     - name: Problem 1, Get harp CMakeLists.txt
       id: p1getCMakeLists2
       run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/harp/CMakeLists.txt > problem1/harp/CMakeLists.txt
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in harp"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in harp"
 
     - name: Problem 1, Get lib CMakeLists.txt
       id: p1getCMakeLists3
       run: node .cbc/getFile.js ${{ secrets.AUTH_TOKEN }} ${{ steps.repo.outputs.content }} problem1/lib/CMakeLists.txt > problem1/lib/CMakeLists.txt
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "CMakeLists.txt found in lib"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, CMakeLists.txt found in lib"
 
     - name: Problem 1, Create Build
       id: p1build
@@ -75,7 +75,7 @@ jobs:
         cd build
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Build directory created"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Build directory created"
 
     - name: Problem 1, Run CMake
       id: p1runCMake
@@ -84,7 +84,7 @@ jobs:
         cmake ..   
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile created"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile created"
 
     - name: Problem 1, Run Make
       id: p1runMake
@@ -93,7 +93,7 @@ jobs:
         make
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile ran"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile ran"
 
     #BEGINNING
     - name: Problem 1, Run program
@@ -101,7 +101,7 @@ jobs:
       run: ./problem1/build/perform > output.log
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Executable ran"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable ran"
 
     - name: Problem 1, Read Output
       id: p1output
@@ -138,7 +138,7 @@ jobs:
         expected: ${{ secrets.HARP_CMAKELISTS }}
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Harp CMakeLists has not been modified"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Harp CMakeLists has not been modified"
     #EDN
 
     #MORE NEW
@@ -161,17 +161,17 @@ jobs:
         expected: ${{ secrets.LIB_CMAKELISTS }}
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Lib CMakeLists has not been modified"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Lib CMakeLists has not been modified"
     #MORE END
 
     #Last New
 
-    
+
 
     #Last End
     
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Executable output is correct"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable output is correct"
 
     - name: Problem 1, Make clean
       id: p1makeClean
@@ -180,7 +180,7 @@ jobs:
         make clean
 
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile clean function ran"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile clean function ran"
 
     - name: Problem 1, Find File
       continue-on-error: true
@@ -204,7 +204,7 @@ jobs:
         expected: Found?
     
     - name: Comment
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile clean function deleted the tree executable"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile clean function deleted the tree executable"
 
       #Problem 2 Testing
     - name: Problem 2, Get root CMakeLists.txt
@@ -366,6 +366,7 @@ jobs:
       if: always() && steps.p1runMake.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Makefile didn't run"
     
+    # Here
     - name: Failure Comment
       if: always() && steps.p1runProgram.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Executable crashed"
@@ -373,6 +374,27 @@ jobs:
     - name: Failure Comment
       if: always() && steps.p1properOutput.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Executable output was incorrect"
+    # There
+
+    # 2
+    - name: Failure Comment
+      if: always() && steps.p1SaveHarpCMakeLists.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Unable to save harp CMake file"
+    
+    - name: Failure Comment
+      if: always() && steps.p1ProperHarpCMakeLists.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Harp CMake file has been modified"
+    # 2
+
+    # 3
+    - name: Failure Comment
+      if: always() && steps.p1SaveLibCMakeLists.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Unable to save lib CMake file"
+    
+    - name: Failure Comment
+      if: always() && steps.p1ProperLibCMakeLists.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Lib CMake file has been modified"
+    # 3
     
     - name: Failure Comment
       if: always() && steps.p1makeClean.outcome == 'failure'
