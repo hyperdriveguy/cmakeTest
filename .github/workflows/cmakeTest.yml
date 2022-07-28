@@ -95,6 +95,7 @@ jobs:
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Makefile ran"
 
+    #BEGINNING
     - name: Problem 1, Run program
       id: p1runProgram
       run: ./problem1/build/perform > output.log
@@ -115,6 +116,59 @@ jobs:
         assertion: should.equal
         actual: ${{ steps.p1output.outputs.content }}
         expected: ${{ secrets.PROGRAM_OUTPUT1 }}
+    #END
+
+    #NEW
+    - name: Problem 1, Save Harp CMakeLists
+      id: p1SaveHarpCMakeLists
+      run: cat problem1/harp/CMakeLists.txt > output.log
+
+    - name: Problem 1, Read Harp CMakeLists
+      id: p1ReadHarpCMakeLists
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: output.log
+
+    - name: Problem 1, Assert Proper Harp CMakeLists
+      id: p1ProperHarpCMakeLists
+      uses: therussiankid92/gat@v1.5
+      with:
+        assertion: should.equal
+        actual: ${{ steps.p1ReadHarpCMakeLists.outputs.content }}
+        expected: ${{ secrets.HARP_CMAKELISTS }}
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Harp CMakeLists has not been modified"
+    #EDN
+
+    #MORE NEW
+    - name: Problem 1, Save Lib CMakeLists
+      id: p1SaveLibCMakeLists
+      run: cat problem1/lib/CMakeLists.txt > output.log
+
+    - name: Problem 1, Read Lib CMakeLists
+      id: p1ReadLibCMakeLists
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: output.log
+
+    - name: Problem 1, Assert Proper Lib CMakeLists
+      id: p1ProperLibCMakeLists
+      uses: therussiankid92/gat@v1.5
+      with:
+        assertion: should.equal
+        actual: ${{ steps.p1ReadLibCMakeLists.outputs.content }}
+        expected: ${{ secrets.LIB_CMAKELISTS }}
+
+    - name: Comment
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Lib CMakeLists has not been modified"
+    #MORE END
+
+    #Last New
+
+    
+
+    #Last End
     
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Executable output is correct"
