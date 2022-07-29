@@ -165,9 +165,13 @@ jobs:
     #MORE END
 
     #Last New
+    - name: Assert CMake Instructions
+      id: assertCMakeInstructions
+      run: node .cbc/assertContains.js problem1/CMakeLists.txt "include_directories,add_executable"
 
-
-
+    - name: Assert Executable
+      id: assertExecutable
+      run: node .cbc/assertContains.js problem1/CMakeLists.txt "perform"
     #Last End
     
     - name: Comment
@@ -365,8 +369,7 @@ jobs:
     - name: Failure Comment
       if: always() && steps.p1runMake.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Makefile didn't run"
-    
-    # Here
+
     - name: Failure Comment
       if: always() && steps.p1runProgram.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Executable crashed"
@@ -374,9 +377,7 @@ jobs:
     - name: Failure Comment
       if: always() && steps.p1properOutput.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Executable output was incorrect"
-    # There
 
-    # 2
     - name: Failure Comment
       if: always() && steps.p1SaveHarpCMakeLists.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Unable to save harp CMake file"
@@ -384,9 +385,7 @@ jobs:
     - name: Failure Comment
       if: always() && steps.p1ProperHarpCMakeLists.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Harp CMake file has been modified"
-    # 2
 
-    # 3
     - name: Failure Comment
       if: always() && steps.p1SaveLibCMakeLists.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Unable to save lib CMake file"
@@ -394,7 +393,14 @@ jobs:
     - name: Failure Comment
       if: always() && steps.p1ProperLibCMakeLists.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Lib CMake file has been modified"
-    # 3
+
+    - name: Failure Comment
+      if: always() && steps.assertCMakeInstructions.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Wrong CMake intructions in the main CMake file"
+
+    - name: Failure Comment
+      if: always() && steps.assertExecutable.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Wrong Executable name in the main CMake file"
     
     - name: Failure Comment
       if: always() && steps.p1makeClean.outcome == 'failure'
