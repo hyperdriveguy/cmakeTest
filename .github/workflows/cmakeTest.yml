@@ -95,6 +95,16 @@ jobs:
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Makefile ran"
 
+    #Last New
+    - name: Assert CMake Instructions
+      id: assertCMakeInstructions
+      run: node .cbc/assertContains.js problem1/CMakeLists.txt "include_directories,add_executable"
+
+    - name: Assert Executable
+      id: assertExecutable
+      run: node .cbc/assertContains.js problem1/CMakeLists.txt "perform"
+    #Last End
+
     #BEGINNING
     - name: Problem 1, Run program
       id: p1runProgram
@@ -163,16 +173,6 @@ jobs:
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Lib CMakeLists has not been modified"
     #MORE END
-
-    #Last New
-    - name: Assert CMake Instructions
-      id: assertCMakeInstructions
-      run: node .cbc/assertContains.js problem1/CMakeLists.txt "include_directories,add_executable"
-
-    - name: Assert Executable
-      id: assertExecutable
-      run: node .cbc/assertContains.js problem1/CMakeLists.txt "perform"
-    #Last End
     
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1, Executable output is correct"
