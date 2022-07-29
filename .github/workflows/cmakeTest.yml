@@ -400,7 +400,7 @@ jobs:
 
     - name: Failure Comment
       if: always() && steps.assertExecutable.outcome == 'failure'
-      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Wrong Executable name in the main CMake file"
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 1 - Error - Wrong executable name in the main CMake file"
     
     - name: Failure Comment
       if: always() && steps.p1makeClean.outcome == 'failure'
