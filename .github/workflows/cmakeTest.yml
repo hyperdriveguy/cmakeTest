@@ -260,6 +260,28 @@ jobs:
     - name: Comment
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2, Makefile ran"
 
+    # Beginning
+    - name: Assert executable in apps CMake file
+      id: assertProblem2Executable
+      run: node .cbc/assertContains.js problem2/apps/CMakeLists.txt "hello"
+
+    - name: Assert CMake Instructions in apps CMake file
+      id: assertAppsCMakeInstructions
+      run: node .cbc/assertContains.js problem2/apps/CMakeLists.txt "add_executable,target_link_libraries"
+
+    - name: Assert CMake Instructions in include CMake file
+      id: assertIncludeCMakeInstructions
+      run: node .cbc/assertContains.js problem2/include/CMakeLists.txt "add_library,target_include_directories,target_link_libraries"
+
+    - name: Assert No PUBLIC in include CMake file
+      id: assertNoPUBLIC
+      run: node .cbc/assertDoesNotContain.js problem2/include/CMakeLists.txt "PUBLIC"
+
+    - name: Assert CMake Instructions in main CMake file
+      id: assertMainCMakeInstructions
+      run: node .cbc/assertContains.js problem2/CMakeLists.txt "cmake_minimum_required,project,add_subdirectory"
+    # End
+
     - name: Problem 2, Run program
       id: p2runProgram
       run: ./problem2/build/apps/hello > output.log
@@ -438,6 +460,28 @@ jobs:
     - name: Failure Comment
       if: always() && steps.p2runMake.outcome == 'failure'
       run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2 - Error - Makefile didn't run"
+
+    # NEW ERRORS
+    - name: Failure Comment
+      if: always() && steps.assertProblem2Executable.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2 - Error - Wrong executable name"
+
+    - name: Failure Comment
+      if: always() && steps.assertAppsCMakeInstructions.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2 - Error - Wrong CMake intructions in the apps CMake file"
+
+    - name: Failure Comment
+      if: always() && steps.assertIncludeCMakeInstructions.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2 - Error - Wrong CMake intructions in the include CMake file"
+
+    - name: Failure Comment
+      if: always() && steps.assertNoPUBLIC.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2 - Error - PUBLIC being used in the include CMake file"
+
+    - name: Failure Comment
+      if: always() && steps.assertMainCMakeInstructions.outcome == 'failure'
+      run: node .cbc/makeComment.js ${{ secrets.AUTH_TOKEN }} ${{ steps.number.outputs.content }} "Problem 2 - Error - Wrong CMake intructions in the main CMake file"
+    # END
     
     - name: Failure Comment
       if: always() && steps.p2runProgram.outcome == 'failure'
