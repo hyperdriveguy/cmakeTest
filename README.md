@@ -17,12 +17,37 @@ First, fork the repository to your user by pressing the fork button in the upper
 ```
 git clone https://github.com/<your_username>/cmakeTest.git
 ```
-Now you are now ready to start coding!
+You are now ready to start coding!
 Start out by entering your email into the 'email.txt' file, so that we can properly give you your badge when you pass the test.
 
-## Problem 1 - 
+## Problem 1 
 
-## Problem 2 - 
+Modify problem1/CMakeLists.txt to compile and run the program found in main.c
+
+It should be very simple and should use the following CMake functions:
+
+1. include_directories()
+2. add_executable()
+
+Finally, the name of the executable needs to be "perform" or you will get an error!
+
+This problem should help you see that CMake can be used to compile and execute bigger projects in a fast and easy way.
+
+## Problem 2 
+
+Use the problem2/apps/CMakeLists.txt file to create the "hello" executable and link to it the "myActionLib".
+
+Use the problem2/include/CMakeLists.txt file to create the "myActionLib" and "myMessageLib" libraries. Link the "myMessageLib" to the "myActionLib". Include the respective directory for both libraries. Do not use PUBLIC in this file.
+
+For problem2/CMakeLists.txt make sure to use the following CMake functions:
+
+1. cmake_minimum_required()
+2. project()
+3. add_subdirectory()
+
+Remember that the name of the executable needs to be "hello" or you will get an error!
+
+This problem should help you see that CMake can be used in a more detailed way to compile and run projects according to your desires. 
 
 ## Submitting
 
