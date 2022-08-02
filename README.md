@@ -37,7 +37,7 @@ This problem should help you see that CMake can be used to compile and execute b
 
 Use the problem2/apps/CMakeLists.txt file to create the "hello" executable and link to it the "myActionLib".
 
-Use the problem2/include/CMakeLists.txt file to create the "myActionLib" and "myMessageLib" libraries. Link the "myMessageLib" to the "myActionLib". Include the respective directory for both libraries. Do not use PUBLIC in this file.
+Use the problem2/include/CMakeLists.txt file to create the "myActionLib" and "myMessageLib" libraries. Link "myMessageLib" to "myActionLib". Include the respective directory for both libraries. Do not use PUBLIC in this file.
 
 For problem2/CMakeLists.txt make sure to use the following CMake functions:
 
